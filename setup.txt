@@ -1,0 +1,24 @@
+To set up and run the provided file, follow these instructions:
+
+    Install the required dependencies:
+        pip install -r requirements.txt
+
+    Make sure you have an OpenAI API key. If you don't have one, you can sign up for an account at https://openai.com and obtain your API key.
+
+    Set the value of the UPLOAD_DIR variable to the directory where you want to store uploaded CSV files. For example, if you want to store them in the same directory as the script, you can set it to ".".
+
+    Set the OpenAI API key by replacing 'YOUR_API_KEY' with your actual API key. Update the line: os.environ['OPENAI_API_KEY'] = 'YOUR_API_KEY'.
+
+    Open a terminal or command prompt and navigate to the directory where you saved the script file.
+
+    Run the script using the following command: streamlit run app.py. 
+
+    This will start the Streamlit server and open a new browser tab with the application running. You should see the CSV Chatbot interface.
+
+    On the sidebar, click the "Upload a CSV file" button and select a CSV file to upload.
+
+    Once the file is uploaded, you can click the "Submit" button to process the uploaded file and get insights from it.
+
+    The chat interface will display the conversation between the user and the assistant. You can enter your questions or prompts in the chat input box and press Enter to interact with the chatbot.
+
+    If you haven't uploaded a CSV file and try to submit a prompt, an info message will be displayed asking you to upload a CSV file first.
