@@ -12,22 +12,24 @@ app = FastAPI()
 UPLOAD_DIR = "uploads"
 
 # Set the OpenAI API key
-os.environ['OPENAI_API_KEY'] = 'YOUR_API_KEY'
+os.environ['OPENAI_API_KEY'] = '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'
 
 with st.sidebar:
     uploaded_file = st.file_uploader("Upload a CSV file", type="csv")
     submit = st.button("Submit")
+    clear = st.button("Refresh")
     
 
-st.title("💬 CSV Chatbot")
+st.title("💬 Comply AI")
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Please upload your CSV to proceed..."}]
-
-
+    st.session_state["messages"] = [{"role": "assistant", "content": "Started a new session. Please upload a file to analyze..."}]
 
 for msg in st.session_state.messages:
     print(msg)
     st.chat_message(msg["role"]).write(msg["content"])
+
+# if clear:
+#     st.session_state = None
 
 if submit:
     file_path = os.path.join(UPLOAD_DIR, 'upload.csv')
@@ -40,8 +42,7 @@ if prompt := st.chat_input():
     if not uploaded_file:
         st.info("Please upload your CSV to continue.")
         st.stop()
-    # else:
-         
+
     file_path = os.path.join(UPLOAD_DIR, 'upload.csv')
     agent = create_csv_agent(OpenAI(temperature=0), file_path, verbose=True)
     st.session_state.messages.append({"role": "user", "content": prompt})
