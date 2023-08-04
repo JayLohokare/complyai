@@ -22,3 +22,6 @@ To set up and run the provided file, follow these instructions:
     The chat interface will display the conversation between the user and the assistant. You can enter your questions or prompts in the chat input box and press Enter to interact with the chatbot.
 
     If you haven't uploaded a CSV file and try to submit a prompt, an info message will be displayed asking you to upload a CSV file first.
+
+pip install -r requirements.txt
+streamlit run app.py --server.enableXsrfProtection false --server.port 8502

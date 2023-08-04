@@ -5,3 +5,5 @@ streamlit_chat
 altair<5
 openai
 tabulate
+openpyxl
+xlrd
