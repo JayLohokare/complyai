@@ -11,7 +11,7 @@ To set up and run the provided file, follow these instructions:
 
     Open a terminal or command prompt and navigate to the directory where you saved the script file.
 
-    Run the script using the following command: streamlit run app.py. 
+    Run the script using the following command: streamlit run app.py --server.enableXsrfProtection false --server.port 8501
 
     This will start the Streamlit server and open a new browser tab with the application running. You should see the CSV Chatbot interface.
 
