@@ -60,9 +60,8 @@ def create_preselected_agent():
     llm = OpenAI(temperature=0)
     return create_csv_agent(OpenAI(temperature=0), 'uploads/employment.csv', verbose=True)
 
-if employmentDataButton:
-    refresh()
-    uploaded_file = True
+def select_employment_data():
+    preselected_uploaded_file = "employment"
     agent = create_preselected_agent()
     printMessage("assistant", "Detected Employment data")
     st.session_state.data_type = "employment"
@@ -72,7 +71,11 @@ if employmentDataButton:
             prompt = prompt + str(testKey) + " : " + str(employment_tests[testKey]) + "\n\n"
     prompt = prompt + "You can also ask questions to explain the data!"
     printMessage("assistant", prompt)
-
+    
+if employmentDataButton:
+    refresh()
+    select_employment_data()
+    
 def create_agent(fileObj):
     llm = OpenAI(temperature=0)
     if '.csv' in fileObj.name:
@@ -108,6 +111,7 @@ if submit:
     else:
         printMessage("assistant", "Uploading and Analyzing the file. We do not retain any data you upload!")
       
+        # agent = create_preselected_agent()
         agent = create_agent(uploaded_file)
 
         resp  = agent.run("If this document contains employee data (e.g. names, designations, departments, reporting managers, date of joining, date of leaving, applications, and termination dates), Say 'Detected employment data'")
@@ -125,9 +129,26 @@ if submit:
 
 
 if prompt := st.chat_input():
-    if not uploaded_file:
+    if not uploaded_file and preselected_uploaded_file == None:
         printMessage("assistant", "Please upload a file for Comply AI to analyze...")
+    elif preselected_uploaded_file != None:
+        
+        printMessage("user", prompt)
+        
+        agent = create_preselected_agent()
+        
+        st.session_state.data_type = "employment"
 
+        if st.session_state.data_type == "employment":
+            selectedOption = (prompt.strip())
+            if selectedOption in employment_tests.keys():
+                response  = agent.run(employment_tests[selectedOption])
+            else:
+                response  = agent.run(prompt)
+            msg = response
+            printMessage("assistant", msg)
+        
+        
     else:
         agent = create_agent(uploaded_file)
         printMessage("user", prompt)
