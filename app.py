@@ -125,6 +125,7 @@ if submit:
                     prompt = prompt + str(testKey) + " : " + str(employment_tests[testKey]) + "\n\n"
             prompt = prompt + "You can also ask questions to explain the data!"
             printMessage("assistant", prompt)
+            st.session_state.preselected_uploaded_file = None
 
         else:
             printMessage("assistant", "Data not compatible with known tests, contact sales for more details")
