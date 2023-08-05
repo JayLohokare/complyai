@@ -58,7 +58,7 @@ with st.sidebar:
 
 def create_preselected_agent():
     llm = OpenAI(temperature=0)
-    return create_csv_agent(OpenAI(temperature=0), 'uploads/upload.csv', verbose=True)
+    return create_csv_agent(OpenAI(temperature=0), 'uploads/employment.csv', verbose=True)
 
 if employmentDataButton:
     refresh()
