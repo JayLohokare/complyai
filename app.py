@@ -43,6 +43,7 @@ def refresh():
     st.session_state.chat_history = None
     st.session_state.data_type = None
     st.session_state.messages = []
+    preselected_uploaded_file = None
     printMessage("assistant", "Started a new session. Please upload a file to analyze...")
     updateMessages()
 
@@ -99,6 +100,7 @@ def create_agent(fileObj):
 st.title("Comply AI")
 if st.session_state != None and "messages" not in st.session_state:
     st.session_state.messages = []
+    preselected_uploaded_file = None
     printMessage("assistant", "Started a new session. Please upload a file to analyze...")
 
 if clear:
