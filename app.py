@@ -54,7 +54,7 @@ with st.sidebar:
     uploaded_file = st.file_uploader("Upload a file")
     submit = st.button("Submit")
     clear = st.button("Refresh")
-    employmentDataButton = st.button("Employment data")
+    employmentDataButton = st.button("Use Sample Employment data")
 
 def create_preselected_agent():
     llm = OpenAI(temperature=0)
