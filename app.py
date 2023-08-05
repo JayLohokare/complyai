@@ -129,9 +129,7 @@ if prompt := st.chat_input():
         printMessage("assistant", "Please upload a file for Comply AI to analyze...")
 
     else:
-        file_path = os.path.join(UPLOAD_DIR, 'upload.csv')
-        agent = create_csv_agent(OpenAI(temperature=0), file_path, verbose=True)
-        
+        agent = create_agent(uploaded_file)
         printMessage("user", prompt)
         
 
