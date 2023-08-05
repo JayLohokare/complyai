@@ -43,7 +43,7 @@ def refresh():
     st.session_state.chat_history = None
     st.session_state.data_type = None
     st.session_state.messages = []
-    preselected_uploaded_file = None
+    st.session_state.preselected_uploaded_file = None
     printMessage("assistant", "Started a new session. Please upload a file to analyze...")
     updateMessages()
 
@@ -62,7 +62,7 @@ def create_preselected_agent():
     return create_csv_agent(OpenAI(temperature=0), 'uploads/employment.csv', verbose=True)
 
 def select_employment_data():
-    preselected_uploaded_file = "employment"
+    st.session_state.preselected_uploaded_file = "employment"
     agent = create_preselected_agent()
     printMessage("assistant", "Detected Employment data")
     st.session_state.data_type = "employment"
@@ -100,7 +100,7 @@ def create_agent(fileObj):
 st.title("Comply AI")
 if st.session_state != None and "messages" not in st.session_state:
     st.session_state.messages = []
-    preselected_uploaded_file = None
+    st.session_state.preselected_uploaded_file = None
     printMessage("assistant", "Started a new session. Please upload a file to analyze...")
 
 if clear:
@@ -131,9 +131,9 @@ if submit:
 
 
 if prompt := st.chat_input():
-    if not uploaded_file and preselected_uploaded_file == None:
+    if not uploaded_file and st.session_state.preselected_uploaded_file == None:
         printMessage("assistant", "Please upload a file for Comply AI to analyze...")
-    elif preselected_uploaded_file != None:
+    elif st.session_state.preselected_uploaded_file != None:
         
         printMessage("user", prompt)
         
